@@ -1,0 +1,5 @@
+rootProject.name = 'spring-boilerplate'
+
+include ':example-api'
+include ':example-entrypoint'
+include ':example-controller'
