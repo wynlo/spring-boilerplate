@@ -12,6 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example-api" />
+            <option value="$PROJECT_DIR$/example-client" />
             <option value="$PROJECT_DIR$/example-controller" />
             <option value="$PROJECT_DIR$/example-entrypoint" />
           </set>

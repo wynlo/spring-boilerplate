@@ -13,13 +13,13 @@ public class ExampleController implements ExampleAPI {
 
     @Override
     @GetMapping(EXAMPLE_BASE_PATH)
-    public ResponseEntity<ExampleClass> getExample() {
+    public ResponseEntity<ExampleClass> exampleGet() {
         return new ResponseEntity<>(new ExampleClass(1, "Hello"), HttpStatus.OK);
     }
 
     @Override
     @PostMapping(EXAMPLE_BASE_PATH)
-    public ResponseEntity<ExampleClass> postExample() {
+    public ResponseEntity<ExampleClass> examplePost() {
         return null;
     }
 }
