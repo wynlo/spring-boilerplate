@@ -1,0 +1,44 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java-library'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	api project(':controller')
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
+	// Keycloak
+	implementation 'org.keycloak:keycloak-spring-boot-starter'
+
+	// Swagger
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.keycloak.bom:keycloak-adapter-bom:9.0.2"
+	}
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}

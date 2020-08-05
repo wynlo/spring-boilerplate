@@ -1,6 +1,6 @@
 rootProject.name = 'spring-boilerplate'
 
-include ':example-api'
-include ':example-entrypoint'
-include ':example-controller'
-include ':example-client'
+include ':api'
+include ':entrypoint'
+include ':controller'
+include ':client'
