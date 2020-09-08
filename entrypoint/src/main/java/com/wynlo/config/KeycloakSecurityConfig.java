@@ -16,8 +16,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
-import static com.wynlo.example.ExampleAPI.EXAMPLE_BASE_PATH;
-import static com.wynlo.example.ExampleAPI.EXAMPLE_VERSION;
+import static com.wynlo.api.ExampleAPI.EXAMPLE_PATHS_SECURE;
 
 @Configuration
 @EnableWebSecurity
@@ -27,12 +26,13 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
+
+        // PATHS TO SECURE - concatenate arrays of paths that you want to secure
+        String[] pathArray = EXAMPLE_PATHS_SECURE;
+
         http.authorizeRequests()
-                .antMatchers(
-                        EXAMPLE_VERSION,
-                        EXAMPLE_VERSION + EXAMPLE_BASE_PATH
-                )
-                .hasAnyRole("user", "admin")
+                .antMatchers(pathArray)
+                .hasAnyRole("user")
                 .anyRequest()
                 .permitAll();
         http.csrf().disable();

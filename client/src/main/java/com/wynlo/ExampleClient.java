@@ -1,21 +1,39 @@
 package com.wynlo;
 
-import com.wynlo.example.ExampleAPI;
-import com.wynlo.example.Example;
+import com.wynlo.api.ExampleAPI;
+import com.wynlo.models.Example;
 import org.springframework.http.ResponseEntity;
 
 public class ExampleClient extends AbstractClient implements ExampleAPI {
 
     @Override
-    public ResponseEntity<Example> exampleGet(String Authorization) {
-        return this.getRestTemplate().getForEntity(
-                this.getHostname() + EXAMPLE_BASE_PATH,
-                Example.class
-        );
+    public ResponseEntity exampleGet(
+            // String Authorization,
+            String id
+    ) {
+        return null;
     }
 
     @Override
-    public ResponseEntity<Example> examplePost() {
+    public ResponseEntity exampleGetAll(
+            // String Authorization
+    ) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity examplePost(
+            // String Authorization,
+            Example example
+    ) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity exampleDelete(
+            // String Authorization
+            String id
+    ) {
         return null;
     }
 }

@@ -12,6 +12,7 @@ repositories {
 dependencies {
 	api project(':controller')
 
+	// Spring
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -24,6 +25,13 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
+	// MongoDB
+	 implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	// Flapdoodle
+	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+	// Testing
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
