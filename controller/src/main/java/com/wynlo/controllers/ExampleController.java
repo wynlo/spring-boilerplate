@@ -1,8 +1,9 @@
 package com.wynlo.controllers;
 
 import com.mongodb.client.result.DeleteResult;
-import com.wynlo.models.Example;
+import com.wynlo.models.Example.Example;
 import com.wynlo.api.ExampleAPI;
+import com.wynlo.models.Example.ExampleDTO;
 import com.wynlo.wrappers.ResponseEntityModelWrapper;
 import com.wynlo.services.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class ExampleController implements ExampleAPI {
     }
 
     @Override
-    @GetMapping(EXAMPLE_GET_PATH)
+    @GetMapping(EXAMPLE_PATH_WITH_ID)
     public ResponseEntity exampleGet(
-            // @RequestHeader String Authorization,
+            @RequestHeader String Authorization,
             @PathVariable("id") String id
     ) {
         Example example = exampleService.getExample(id);
@@ -36,7 +37,9 @@ public class ExampleController implements ExampleAPI {
 
     @Override
     @GetMapping(EXAMPLE_BASE_PATH)
-    public ResponseEntity exampleGetAll() {
+    public ResponseEntity exampleGetAll(
+            @RequestHeader String Authorization
+    ) {
         List<Example> exampleList = exampleService.getAllExamples();
         return ResponseEntity.ok(
                 ResponseEntityModelWrapper.build(exampleList)
@@ -46,24 +49,36 @@ public class ExampleController implements ExampleAPI {
     @Override
     @PostMapping(EXAMPLE_BASE_PATH)
     public ResponseEntity examplePost(
-            // @RequestHeader String Authorization,
-            @Valid @RequestBody Example example
+            @RequestHeader String Authorization,
+            @Valid @RequestBody ExampleDTO exampleDTO
     ) {
-        Example newExample = exampleService.addExample(example);
+        Example newExample = exampleService.addExample(exampleDTO.toTrueClass());
         return ResponseEntity.ok(
                 ResponseEntityModelWrapper.build(newExample)
         );
     }
 
     @Override
-    @DeleteMapping(EXAMPLE_DELETE_PATH)
+    @DeleteMapping(EXAMPLE_PATH_WITH_ID)
     public ResponseEntity exampleDelete(
-            // @RequestHeader String Authorization,
+            @RequestHeader String Authorization,
             @PathVariable("id") String id
     ) {
         DeleteResult deleteResult = exampleService.deleteExample(id);
         return ResponseEntity.ok(
                 ResponseEntityModelWrapper.build(deleteResult)
+        );
+    }
+
+    @Override
+    @PostMapping(EXAMPLE_PATH_WITH_ID)
+    public ResponseEntity exampleUpdate(
+            @RequestHeader String Authorization,
+            @Valid @RequestBody Example example
+    ) {
+        Example newExample = exampleService.updateExample(example);
+        return ResponseEntity.ok(
+                ResponseEntityModelWrapper.build(newExample)
         );
     }
 

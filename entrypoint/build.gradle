@@ -13,10 +13,8 @@ dependencies {
 	api project(':controller')
 
 	// Spring
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-devtools'
 
 	// Keycloak
 	implementation 'org.keycloak:keycloak-spring-boot-starter'
@@ -30,6 +28,9 @@ dependencies {
 
 	// Flapdoodle
 	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+	// Dotenv
+	implementation 'me.paulschwarz:spring-dotenv:1.0.0'
 
 	// Testing
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {

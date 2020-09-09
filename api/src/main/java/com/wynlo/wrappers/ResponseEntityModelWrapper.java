@@ -12,6 +12,11 @@ public class ResponseEntityModelWrapper<E> {
         this.data = data;
     }
 
+    public ResponseEntityModelWrapper(E data, String timestamp) {
+        this.data = data;
+        this.timestamp = timestamp;
+    }
+
     public static <E> ResponseEntityModelWrapper<E> build(E data) {
         return new ResponseEntityModelWrapper<E>(data);
     }

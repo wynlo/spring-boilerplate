@@ -12,9 +12,7 @@ dependencies {
 	api project(':api')
 
 	// Spring
-	implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	// Testing
     testImplementation('org.springframework.boot:spring-boot-starter-test') {

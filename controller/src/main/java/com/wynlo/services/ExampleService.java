@@ -1,10 +1,10 @@
 package com.wynlo.services;
 
 import com.mongodb.client.result.DeleteResult;
-import com.wynlo.dao.ExampleDAO;
-import com.wynlo.dao.MongoExampleDataAccessService;
-import com.wynlo.models.Example;
+import com.wynlo.dao.Example.ExampleDAO;
+import com.wynlo.models.Example.Example;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class ExampleService {
     private final ExampleDAO exampleDAO;
 
     @Autowired
-    public ExampleService(MongoExampleDataAccessService exampleDAO) {
+    public ExampleService(@Qualifier("mongoDAO") ExampleDAO exampleDAO) {
         this.exampleDAO = exampleDAO;
     }
 
@@ -35,8 +35,6 @@ public class ExampleService {
         return exampleDAO.deleteExampleById(id);
     }
 
-    public Example updateExample(Example example) {
-        return exampleDAO.updateExample(example);
-    }
+    public Example updateExample(Example example) { return exampleDAO.updateExample(example); }
 
 }
