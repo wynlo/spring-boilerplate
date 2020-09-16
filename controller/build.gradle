@@ -1,32 +1,4 @@
-plugins {
-	id 'org.springframework.boot' version '2.3.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java-library'
-}
-
-repositories {
-	mavenCentral()
-}
-
 dependencies {
-	api project(':api')
-
-	// Spring
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.jetbrains:annotations:19.0.0'
-
-	// MongoDB
-	 implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-
-	// Testing
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.keycloak.bom:keycloak-adapter-bom:9.0.2"
-	}
+    api project(':api')
+    api project(':client')
 }

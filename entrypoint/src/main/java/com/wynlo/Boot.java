@@ -1,14 +1,19 @@
 package com.wynlo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @SpringBootApplication(
         scanBasePackages = "com.wynlo",
-        exclude = {DataSourceAutoConfiguration.class }
+        exclude = { DataSourceAutoConfiguration.class }
 )
 public class Boot {
 
@@ -22,9 +27,15 @@ public class Boot {
         logger.error("You guessed it, an ERROR message.");
     }
 
-    public static void main(String[] args) {
-//        printTestLogs();
+    public static void main(String[] args) throws JsonProcessingException {
         SpringApplication.run(Boot.class, args);
+    }
+
+    @EventListener
+    public void handleContextRefresh(ContextRefreshedEvent event) {
+        ApplicationContext applicationContext = event.getApplicationContext();
+        applicationContext.getBean(RequestMappingHandlerMapping.class)
+                .getHandlerMethods().forEach((key, value) -> System.out.println(key + "," + value));
     }
 
 

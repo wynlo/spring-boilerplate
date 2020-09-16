@@ -1,6 +1,9 @@
+/** There should really only be one of this at the top level. */
+
 rootProject.name = 'spring-boilerplate'
 
 include ':api'
 include ':entrypoint'
 include ':controller'
 include ':client'
+include ':test:end-to-end'

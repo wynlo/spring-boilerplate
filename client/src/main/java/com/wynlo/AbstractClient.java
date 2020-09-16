@@ -1,25 +1,38 @@
 package com.wynlo;
 
-import org.springframework.web.client.RestTemplate;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 public class AbstractClient {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private String port;
+    private TestRestTemplate restTemplate;
+    private ObjectMapper objectMapper;
 
-    public RestTemplate getRestTemplate() {
+    public AbstractClient(String port, TestRestTemplate restTemplate) {
+        this.port = port;
+        this.restTemplate = restTemplate;
+        this.objectMapper = new ObjectMapper();
+    }
+
+    public TestRestTemplate getRestTemplate() {
         return restTemplate;
     }
 
-    public String getHostname() {
-        try {
-            return InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            return "http://localhost:8080";
-        }
+    public ObjectMapper getObjectMapper() { return objectMapper; }
+
+    public String constructUrl(String path) {
+        return "http://localhost:" + port + path;
     }
+
+    public HttpHeaders createHeaders(String bearerToken) {
+        return new HttpHeaders() {{
+            set("Authorization", bearerToken);
+            setContentType(MediaType.APPLICATION_JSON);
+        }};
+    }
+
 
 }

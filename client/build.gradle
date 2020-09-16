@@ -1,29 +1,3 @@
-plugins {
-	id 'org.springframework.boot' version '2.3.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java-library'
-}
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-	api project(':api')
-
-	// Spring
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	// Testing
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-}
-
-bootJar {
-	enabled = false
-}
-
-jar {
-	enabled = true
+    api project(':api')
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ExampleDTO implements Serializable, DTO  {
+public class ExampleDTO implements Serializable, DTO {
 
     @NotNull
     private String name;

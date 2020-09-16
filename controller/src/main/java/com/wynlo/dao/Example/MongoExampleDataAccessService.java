@@ -1,10 +1,11 @@
 package com.wynlo.dao.Example;
 
-import com.mongodb.client.result.DeleteResult;
 import com.wynlo.models.Example.Example;
+import com.mongodb.client.result.DeleteResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndReplaceOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -42,6 +43,11 @@ public class MongoExampleDataAccessService implements ExampleDAO {
     @Override
     public DeleteResult deleteExampleById(String id) {
         return mongoTemplate.remove(query(where("id").is(id)), Example.class);
+    }
+
+    @Override
+    public DeleteResult deleteAllExamples() {
+        return mongoTemplate.remove(new Query(), Example.class);
     }
 
     @Override
