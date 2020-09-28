@@ -2,3 +2,10 @@ dependencies {
     api project(':api')
     api project(':client')
 }
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

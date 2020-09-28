@@ -1,6 +1,6 @@
 /** There should really only be one of this at the top level. */
 
-rootProject.name = 'spring-boilerplate'
+rootProject.name = 'springboot-boilerplate'
 
 include ':api'
 include ':entrypoint'

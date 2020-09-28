@@ -5,10 +5,12 @@ import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
-public class MongoConfig {
+@Profile("local")
+public class MongoEmbeddedDBConfig {
 
     @Value("${spring.data.mongodb.host}")
     private String mongoHost;
@@ -16,9 +18,18 @@ public class MongoConfig {
     @Value("${spring.data.mongodb.port}")
     private String mongoPort;
 
+    /**
+     * mongodb://ip:p
+     */
+
     @Bean
     public MongoClient mongoClient() {
-        return MongoClients.create("mongodb://" + mongoHost + ":" + mongoPort);
+        String mongoURI = String.format(
+                "mongodb://%s:%s",
+                mongoHost,
+                mongoPort
+        );
+        return MongoClients.create(mongoURI);
     }
 
     @Bean

@@ -1,3 +1,31 @@
 dependencies {
     api project(':controller')
 }
+
+dependencies {
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Flapdoodle
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+    // Swagger
+    implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
+
+    // Keycloak
+    implementation 'org.keycloak:keycloak-spring-boot-starter'
+
+
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.keycloak.bom:keycloak-adapter-bom:9.0.2"
+    }
+}
+
+bootJar {
+    enabled = true
+}

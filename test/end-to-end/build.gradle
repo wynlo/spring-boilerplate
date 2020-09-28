@@ -2,3 +2,28 @@ dependencies {
     api project(':client')
     api project(':controller')
 }
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+
+    // Flapdoodle
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+    // Testing
+    testImplementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+}

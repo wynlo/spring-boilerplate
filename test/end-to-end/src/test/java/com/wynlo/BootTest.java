@@ -12,17 +12,11 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
         scanBasePackages = "com.wynlo",
         exclude = { DataSourceAutoConfiguration.class }
 )
-public class Boot {
+public class BootTest {
 
     public static void main(String[] args) {
-        SpringApplication.run(Boot.class, args);
+        SpringApplication springApplication = new SpringApplication(BootTest.class);
+        springApplication.run(args);
     }
-
-//    @EventListener
-//    public void handleContextRefresh(ContextRefreshedEvent event) {
-//        ApplicationContext applicationContext = event.getApplicationContext();
-//        applicationContext.getBean(RequestMappingHandlerMapping.class)
-//                .getHandlerMethods().forEach((key, value) -> System.out.println(key + "," + value));
-//    }
 
 }

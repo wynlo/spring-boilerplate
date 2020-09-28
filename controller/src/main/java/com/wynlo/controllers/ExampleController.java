@@ -24,11 +24,14 @@ public class ExampleController implements ExampleAPI {
 
     @Override
     @GetMapping(EXAMPLE_PATH_WITH_ID)
-    public ResponseEntity<Example> exampleGet(
+    public ResponseEntity exampleGet(
             @RequestHeader String Authorization,
             @PathVariable("id") String id
     ) {
         Example example = exampleService.getExample(id);
+        if (example == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(example);
     }
 
@@ -53,11 +56,14 @@ public class ExampleController implements ExampleAPI {
 
     @Override
     @DeleteMapping(EXAMPLE_PATH_WITH_ID)
-    public ResponseEntity<DeleteResult> exampleDelete(
+    public ResponseEntity exampleDelete(
             @RequestHeader String Authorization,
             @PathVariable("id") String id
     ) {
         DeleteResult deleteResult = exampleService.deleteExample(id);
+        if (deleteResult.getDeletedCount() == 0) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(deleteResult);
     }
 
@@ -68,6 +74,9 @@ public class ExampleController implements ExampleAPI {
             @Valid @RequestBody Example example
     ) {
         Example newExample = exampleService.updateExample(example);
+        if (newExample == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(newExample);
     }
 

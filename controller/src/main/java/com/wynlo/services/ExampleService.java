@@ -35,6 +35,11 @@ public class ExampleService {
         return exampleDAO.deleteExampleById(id);
     }
 
-    public Example updateExample(Example example) { return exampleDAO.updateExample(example); }
+    public Example updateExample(Example example) {
+        if (exampleDAO.selectExampleById(example.getId()) != null) {
+            return exampleDAO.updateExample(example);
+        }
+        return null;
+    }
 
 }
