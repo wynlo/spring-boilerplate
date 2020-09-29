@@ -21,7 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.stream.Stream;
 
-@Profile({"local", "production"})
+@Profile({"local", "production"}) // add more environment related spring profiles here
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)

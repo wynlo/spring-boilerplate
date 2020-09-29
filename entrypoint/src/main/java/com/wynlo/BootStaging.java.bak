@@ -12,14 +12,14 @@ import org.springframework.context.annotation.FilterType;
 @ComponentScan(
         basePackages = "com.wynlo",
         excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
-                BootProduction.class
+                BootProduction.class, BootLocal.class
         })
 )
-public class BootLocal {
+public class BootStaging {
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(BootLocal.class);
-        springApplication.setAdditionalProfiles("local");
+        SpringApplication springApplication = new SpringApplication(BootStaging.class);
+        springApplication.setAdditionalProfiles("staging");
         springApplication.run(args);
     }
 

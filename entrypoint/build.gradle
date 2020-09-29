@@ -16,15 +16,15 @@ dependencies {
 
     // Keycloak
     implementation 'org.keycloak:keycloak-spring-boot-starter'
-
-
 }
+
 
 dependencyManagement {
     imports {
         mavenBom "org.keycloak.bom:keycloak-adapter-bom:9.0.2"
     }
 }
+
 
 bootJar {
     enabled = true

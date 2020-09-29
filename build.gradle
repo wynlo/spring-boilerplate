@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java-library'
+    id 'application'
 }
 
 allprojects {
@@ -28,18 +29,41 @@ allprojects {
 
         // MongoDB
         implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    }
 
-    springBoot {
-        mainClassName = 'com.wynlo.BootProduction'
     }
-
 }
 
-subprojects {
+task buildLocal() {
+    allprojects {
+        springBoot {
+            mainClassName = 'com.wynlo.BootLocal'
+        }
+    }
+    subprojects.forEach {
+        buildLocal.dependsOn it.tasks.getByName('build')
+    }
+}
 
-    /**
-     *  Individual dependencies are configured inside respective module's build.gradle for clarity.
-     */
 
+//task buildStaging() {
+//    allprojects {
+//        springBoot {
+//            mainClassName = 'com.wynlo.BootStaging'
+//        }
+//    }
+//    subprojects.forEach {
+//        buildStaging.dependsOn it.tasks.getByName('build')
+//    }
+//}
+
+
+task buildProduction() {
+    allprojects {
+        springBoot {
+            mainClassName = 'com.wynlo.BootProduction'
+        }
+    }
+    subprojects.forEach {
+        buildProduction.dependsOn it.tasks.getByName('build')
+    }
 }
