@@ -33,37 +33,51 @@ allprojects {
     }
 }
 
-task buildLocal() {
-    allprojects {
-        springBoot {
-            mainClassName = 'com.wynlo.BootLocal'
+task buildApp() {
+
+    if (project.hasProperty('mainClass')) {
+
+        if (project.property('mainClass') == "local") {
+            println("\nLocal")
+            allprojects {
+                springBoot {
+                    mainClassName = 'com.wynlo.BootLocal'
+                }
+            }
+            subprojects.forEach {
+                buildApp.dependsOn it.tasks.getByName('build')
+            }
+        }
+        else if (project.property('mainClass') == "staging") {
+            println("\nStaging")
+            allprojects {
+                springBoot {
+                    mainClassName = 'com.wynlo.BootStaging'
+                }
+            }
+            subprojects.forEach {
+                buildApp.dependsOn it.tasks.getByName('build')
+            }
+        }
+        else if (project.property('mainClass') == "production") {
+            println("\nProduction")
+            allprojects {
+                springBoot {
+                    mainClassName = 'com.wynlo.BootProduction'
+                }
+            }
+            subprojects.forEach {
+                buildApp.dependsOn it.tasks.getByName('build')
+            }
+        }
+        else {
+            println('Please set valid property mainClass (e.g. -PmainClass=local). Options: local, staging, production')
         }
     }
-    subprojects.forEach {
-        buildLocal.dependsOn it.tasks.getByName('build')
+
+    else {
+        println('Please set valid property mainClass (e.g. -PmainClass=local). Options: local, staging, production')
     }
+
 }
 
-
-//task buildStaging() {
-//    allprojects {
-//        springBoot {
-//            mainClassName = 'com.wynlo.BootStaging'
-//        }
-//    }
-//    subprojects.forEach {
-//        buildStaging.dependsOn it.tasks.getByName('build')
-//    }
-//}
-
-
-task buildProduction() {
-    allprojects {
-        springBoot {
-            mainClassName = 'com.wynlo.BootProduction'
-        }
-    }
-    subprojects.forEach {
-        buildProduction.dependsOn it.tasks.getByName('build')
-    }
-}

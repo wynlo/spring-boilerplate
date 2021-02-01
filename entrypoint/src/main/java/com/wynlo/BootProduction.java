@@ -13,7 +13,7 @@ import org.springframework.context.annotation.FilterType;
 @ComponentScan(
         basePackages = "com.wynlo",
         excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {
-                BootLocal.class
+                BootLocal.class, BootStaging.class
         })
 )
 public class BootProduction {

@@ -17,11 +17,10 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.stream.Stream;
 
-@Profile({"local", "production"}) // add more environment related spring profiles here
+@Profile({"local", "staging", "production"}) // add more environment related spring profiles here
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
@@ -42,10 +41,11 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 
         http.authorizeRequests()
                 .antMatchers(pathArray)
-                .hasAnyRole("user")
+                .hasAnyRole("admin", "student", "teacher")
                 .anyRequest()
                 .permitAll();
-        http.csrf().disable();
+
+        http.cors().and().csrf().disable();
     }
 
     @Autowired
